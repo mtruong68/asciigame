@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+html {
+  min-height:100%;
+}
+
+body {
+  font-family: 'Inconsolata', monospace;
+  margin: 0;
+}
+
+button{
+  font-family: 'Ubuntu', sans-serif;
+  border:none;
+  background: rgba(255, 255, 255, .55);
+  width: 160px;
+  height: 30px;
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+  background: rgba(206,206,206, .4);
+}
+
+.box{
+  border: white 1px solid;
+  padding: 5px;
+  margin: 5px;
+}
+
+.space {
+  white-space: pre;
+}
+
+#overlay {
+  position:absolute;
+  display: none;
+  background: rgba(202, 202, 202, .5);
+  height: 100%;
+  width: 100%;
+  top:0;
+  z-index:2;
+  
+}
+
+/*artist statement*/
+#artiststatement {
+  margin:auto;
+  margin-top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: none;
+  position: absolute;
+  background: white;
+  max-width: 720px;
+  max-height: 560px;
+  padding: 10px;
+  background: #79B6A7;
+  font-family: 'Inconsolata', monospace;
+}
+
+.material-icons:hover{
+  color: white;
+  cursor:pointer;
+}
+
+#artiststatement .text{
+  max-height:380px;
+  overflow-y: scroll;
+  background: white;
+  line-height: 1.6;
+  padding: 8px;
+  font-family: 'Lato', sans-serif;
+  font-size:14px;
+}
+
+/*dialogue*/
+#dialogueContainer{
+  font-family: 'Inconsolata', monospace;
+  border: 1px solid black;
+  outline: 2px solid black;
+  outline-offset: -6px;
+  margin:auto;
+  margin-top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  background: white;
+  min-height:160px;
+  max-height:400px;
+  max-width: 600px;
+  padding: 12px;
+  position: absolute;
+}
+
+#dialogueImage{ border: 1px solid black; }
+#dialogueName{font-weight:bold; margin-bottom: 4px;}
+#dialogueLine a:hover {color:blue; cursor:pointer;}
+#dialogueNext:hover{color:blue; cursor:pointer;}
+#dialogueReact{
+  margin-right: 8px;
+  min-width:90px;
+  min-height:120px;
+  padding: 6px;
+  line-height: 130%;
+}
+#dialogueLineContainer { 
+  position:relative;
+  background: aliceblue;
+  padding: 6px;
+  width: 100%;
+}
+
+/*location buttons/containers*/
+.loc {
+  border:none;
+  width: 160px;
+  height: 30px;
+}
+.loc[data-val=inside]{background-color: #ffc2cd;}
+.loc[data-val=outside]{background-color: #deffbd;}
+.loc[data-val=beyond]{background-color: #bae7ff;}
+
+#inside{ 
+  display:inline-block;
+  background-color: #ffc2cd;
+  min-width: 100%;
+  min-height: 100%;
+}
+#outside{ 
+  display: flex;
+  background-color: #deffbd;
+  min-width: 100%;
+  min-height: 100%;
+}
+#beyond { 
+  display:inline-block; 
+  background-color: #bae7ff;
+  min-width: 100%;
+  min-height: 100%;
+}
+#outside.hidden,#beyond.hidden,#inside.hidden{ display: none;}
+
+.spacing {
+  white-space: pre;
+  font-family: calibri, sans-serif;
+}
+
+/*Garden*/
+#gardenContainer{max-width:50%;}
+
+/*Gather Button + progress UI*/
+#gatherBtn {
+  width: 160px;
+  margin-right: 8px;
+}
+
+#gatherBar{
+  width: 100%;
+  height: 30px;
+  background-color: green;
+}
+
+#gather{
+  position: absolute;
+  border:none;
+  width: 160px;
+  height: 30px; 
+  background: rgba(206, 206, 206, 0.7);
+}
+
+#gather:hover {
+  background: rgba(190, 190, 190, 0.7);
+}
+
+
+/*messages container*/
+#messageContainer {
+  min-width:200px;
+  width:200px;
+  
+}
+
+#messages div { 
+  margin-bottom: 6px; 
+}
+
+
+/*this is for all the dropdown/hover content*/
+.dropbtn {
+  min-width: 120px;
+  padding: 4px;
+  border: none;
+  margin: 12px 0px;
+  align-self:center;
+  cursor:pointer;
+}
+
+.dropdown, .dropdown2 {
+  position: relative;
+  display: flex;
+  max-width:0px;
+  cursor:pointer;
+}
+
+.dropdown{height:60px;}
+.dropdown2{height:30px;}
+
+.dropdown-content,.dropdown-content2 {
+  display: none;
+  z-index: 1;
+}
+
+.dropdown button {
+  min-width:120px;
+  max-width:120px;
+}
+
+.dropdown:hover .dropdown-content {display: block; cursor:pointer;}
+.dropdown2:hover .dropdown-content2 {display: block; cursor:pointer;}
+
+/*for the crafting button tooltips I KNOW IT'S BAD*/
+.craftButton{
+    cursor:default;
+}
+  
+  .tooltip{
+    display: none;
+    color: white;
+    background: #96C294;
+    text-align: center;
+    font-size:12px;
+    padding: 6px 0px;
+    min-width: 160px;
+    max-width: 160px;
+  }
+  
+  .craftButton:hover + .tooltip {display:block;position:absolute;}
+
+
+/*
+.enchantBtn {
+  display: none;
+}*/
+
+
