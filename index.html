@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ASCII</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="./ui.js" defer></script>
+    <script src="./world.js" defer></script>
+    <script src="./dialogueManager.js" defer></script>
+    <script src="./dialogue.js" defer></script>
+    <script src="./objectManager.js" defer></script>
+    <script src="./objects.js" defer></script>
+    <script src="./gameManager.js" defer></script>
+  </head>
+  <body>
+     <!-- overlay over entire screen to prevent actions -->
+    <div id="overlay"></div>
+
+    <div id="artiststatement">
+      <span class="material-icons" onclick="closeStatement()" style="float:right;">close</span>
+      <div style="padding: 10px 0px; letter-spacing:0.5px;"><b>Artist Statement</b></div>
+      <div class="text">
+         Spoilers for the game are below.
+        <br><br>
+        I made this game as an examination and critique about my and others attitudes during this pandemic. When public places in the US started shutting down due to the pandemic, I (along with many other college students) returned home. I constantly felt irritated by the constraint of my young independence. It was (and still is) obvious that others were as upset as I-- perhaps this is the mindset of American individualism, but reckless decisions usually impact yourself the most (although I'm aware of many counter-examples to this). A bad choice for lunch, a bad choice of a major, of a career... the effects of these can ripple out to communities connected to you, but they direct your own life.
+        <br><br>
+        Yet the pandemic changes this dynamic and directly posed me the questions: what do I owe to others? How am I beholden to strangers, what is my obligation to my community? If my actions have the potential to hurt others, when do I stop? At what cost of diminishment of myself-- my enjoyment, my time, my freedom?
+        <br><br>
+        There are two main actions you can choose in the game: you either speak to the island's inhabitants, or you explore the world. The latter follows the structure of a traditional game: there are bosses to defeat, items to accumulate, and goals to reach. the former path does not resemble a game: there are no objectives in talking to the islands' inhabitants and no clear benefit to doing so (you can receive most of the characters' dialogue through the world exploration path). Yet following exploring the world means disrupting the inhabitants lives. As you explore the world, you destroy it (perhaps explore isn't a suitable word- exploit or conquer is more correct). The conclusion of this path is your escape off of a planet you destroyed, leaving the inhabitants to live in a ruined world. Here, 'freedom' is interchangable with 'lack of obligations': the most free you can be is to break all ties to the community. In gaining this freedom, you must repeatedly exercise selfishness and harm the other characters. But if you don't play the game, you end up being severely restricted in action.
+        <br><br>
+        Of course, there are clear parallels between the actions you might take during the pandemic and the actions you might take in this game. The pandemic also influenced the game in other aspects, specifically the augmentation of loneliness through isolation: loneliness from familial estrangement; self-imposed loneliness as a result of abuse;  loneliness from being rejected by others. But this game also explores how to be gentle and supportive in the midst of loneliness: yours and theirs.
+        <br><br>
+        Finally, this game is about production and the destruction of the environment: a blunt metaphor about capitalism. From Ian Bogost's Cow Clicker to Cookie Clicker... incremental games are about accumulation. I find a lot of pleasure in "clicker" games, but I wonder why simple accumulation can be so addictive. There are ways to produce in this game that are small-scale and personal, but in order to fully explore the world, your garden must become a factory, and you need to use the world's energy. Through this production, you ruin the world.
+        <br><br>
+        I am indebted to other incremental games for many ideas, mechanics, and even some code. I found A Dark Room and Candy Box to be models through which I could develop my own ideas. I also was inspired by Undertale and Shadow of the Colossus, and subconciously, probably many more influences. In this text, I reference The Good Place and my favorite <a target="_blank" href="https://theoutline.com/post/4985/ask-a-fuck-up-how-do-i-live-when-everything-sucks">advice columnist</a>. Finally, I'm glad that I can make an artwork that is a game; I find play to be an important way to process the world.
+      </div>
+    </div>
+
+    <div id="dialogueContainer">
+      <div id="dialogueImage"></div>
+      <div style="display: flex; margin:12px 0px 4px 0px; height:130px;">
+        <div id="dialogueReact" class="space"></div>
+        <div id="dialogueLineContainer">
+          <div id="dialogueName"></div>
+          <div id="dialogueLine"></div>
+          <a id="dialogueNext" style="position:absolute; bottom:6px; right:6px;">&gt;&gt; next</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin: 2em; display: flex;">
+      <div id="messageContainer" class="box">
+        <a onclick="openStatement()"><u>Messages</u></a>
+        <div id="messages"></div>
+      </div>
+
+      <div id="main">
+        <div id="displayButtons">
+          <button class="loc" data-val="inside">Inside</button>
+          <button class="loc" data-val="outside">Outside</button>
+          <button class="loc" data-val="beyond">Beyond</button>
+        </div>
+
+        <div id="inside">
+          <div id="room">
+            <div id="fireplace"><br>      , #   |()|   # ,<br>     _#_#___|__|___#_#__<br>    [__________________]<br>     |-_ -=__=-_ -==_-|<br>     |_.------------.=|<br>____ |=| o        o |=|________<br>    _|-| !   `(   ! |-|_        <br>   /_=_|_! _(_.)_ !_|=__\ <br></div>
+            <div id="door"> __________<br>|  __  __  |<br>| |  ||  | |<br>| |  ||  | |<br>| |__||__| |<br>|  __  __ O|<br>| |  ||  | |<br>| |  ||  | |<br>| |  ||  | |<br>| |  ||  | |<br>| |__||__| |<br>|__________|---</div>
+            <div id="bed">           ___<br>       ,.""___""-<br>      .;""'| |`"":.<br>      || |_|_|_|_||<br>      ||/______//||<br>     //____ ____ /|<br>    /__ ___ __ _//|<br> ,-""___""-.    //|<br>.;""'| |`"":.  // <br>||/| | | | || //<br>||_|_|_|_|_||//<br>||_________||/<br>||         ||<br>''         ''<br></div>
+            <div id="window">o=(=(=(=(=(=(=)=)=)=)=o<br>  !-'-'-'-/_\-'-'-'-!<br>  !!! , /  |  \`  ! !<br>  !!  ,|___|___`  !!!<br>  !_,| |_______|` `_!<br>  !-`| |       | |,-!<br>  !!!! |       | ! !!<br>  !!!! |       | !!!!<br>  !!!!_|_______|_!!!!<br></div>
+            <div id="bookshelf">+===============/|<br>|.-<a class="artbook">|a|</a>_<a class="mapbook">|m|</a>&lt;\   | |<br>||_<a class="artbook">|r|</a>=<a class="mapbook">|a|</a> \\  | |<br>||_<a class="artbook">|t|</a>_<a class="mapbook">|p|</a>  \&gt; | |<br>+==============+/<br></div>
+          </div>
+        </div>
+
+        <div id="outside" class="hidden">
+          <div id="gardenContainer" class="box">
+            <span>Garden</span><span id="gardenSize"> 0/10</span>
+            <div style="display:flex; margin: 8px 0px;">
+              <div id="gatherBtn">
+                <button id="gather">gather</button>
+                <div id="gatherBar"></div>
+              </div>
+              <button id="plant"> plant </button>
+            </div>
+            <div id="garden"></div>
+          </div>
+          <div style="display:block; width:50%;">
+            <div id="inventoryContainer" class="box">
+            <div>Inventory</div>
+            <div id="inventory"></div>
+            </div>
+            <div id="craftingContainer" class="box">
+            <div>Crafting</div>
+            <div id="crafting"></div>
+          </div>
+          </div>
+        </div>
+
+        <div id="beyond" class="hidden">
+          <div id="mapContainer" class="box">
+            <p>
+              map
+            </p>
+            <div id="map">
+              <button>island</button>
+              <button>witch house</button>
+              <button>woods</button>
+              <button>sand dunes</button>
+              <button>chrome city</button>
+              <button>crystal caverns</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
